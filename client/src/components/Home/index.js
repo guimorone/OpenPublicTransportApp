@@ -3,10 +3,9 @@ import Maps from "../Maps";
 
 import { connect } from "react-redux";
 import { Creators as TransportCreators } from "../../store/ducks/transport";
-import ReactLoading from "react-loading";
 
 import { StyledHome } from "./styles";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Table } from "react-bootstrap";
 
 class Home extends Component {
   constructor(props) {
@@ -16,10 +15,58 @@ class Home extends Component {
     };
   }
 
+  renderLineInformation() {
+    const { data } = this.props.transport;
+
+    return (
+      <>
+        <h2>Horários de saída do terminal</h2>
+        <Table
+          striped
+          bordered
+          hover
+          className="mt-3 w-75"
+          style={{ textAlign: "center" }}
+        >
+          <thead>
+            <tr>
+              <th>Horário de saída</th>
+              <th>Observação</th>
+              <th>Dia da semana</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data?.data?.map((element, index) => {
+              let weekDay;
+              switch (element.tipo_dia) {
+                case "SAB":
+                  weekDay = "Sábado";
+                  break;
+                case "DOM":
+                  weekDay = "Domingo";
+                  break;
+                default:
+                  weekDay = "Dias úteis";
+                  break;
+              }
+
+              return (
+                <tr key={index}>
+                  <td>{element.horario_saida}</td>
+                  <td>{element.observacao}</td>
+                  <td>{weekDay}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      </>
+    );
+  }
+
   render() {
     const { currentLineId } = this.state;
-    const { transport, getTransport } = this.props;
-    const { loading, data } = transport;
+    const { getTransport } = this.props;
 
     return (
       <StyledHome className="mb-5">
@@ -44,9 +91,11 @@ class Home extends Component {
           variant="primary"
           onClick={() => getTransport(currentLineId)}
           style={{ height: "5vh", width: "10vw" }}
+          className="mb-5"
         >
           Buscar
         </Button>
+        {this.renderLineInformation()}
       </StyledHome>
     );
   }

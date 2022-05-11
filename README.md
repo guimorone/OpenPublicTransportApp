@@ -2,6 +2,8 @@
 
 Criado com o intuito de melhorar o acesso a informação sobre os transportes públicos no país.
 
+Atualmente, irá funcionar apenas para Recife. Porém, a ideia é expandir para todo o país.
+
 ### Depedências:
 
 - Python v3.8.10
@@ -40,3 +42,5 @@ Vale ressaltar que será muito importante utilizar um ambiente virtual:
 ```
 
 - Acesse `http://localhost:3000/`
+
+#### Obs: Se der problema em algum pacote, pode adicionar a tag `--force` sem medo ao `npm i`

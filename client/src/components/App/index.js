@@ -16,12 +16,9 @@ class App extends Component {
         </BrowserRouter>
         <ReduxToastr
           timeOut={4000}
-          newestOnTop={false}
           preventDuplicates
           position="top-right"
           getState={(state) => state.toastr} // This is the default
-          transitionIn="fadeIn"
-          transitionOut="fadeOut"
           progressBar
           closeOnToastrClick
         />

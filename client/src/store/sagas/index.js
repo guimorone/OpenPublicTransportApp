@@ -7,8 +7,8 @@ import getLocation from "./location";
 import getTransport from "./transport";
 
 export default function* rootSaga() {
-  return yield all(
-    [takeLatest(LocationTypes.GET_LOCATION, getLocation)],
-    [takeLatest(TransportTypes.GET_TRANSPORT, getTransport)]
-  );
+  return yield all([
+    takeLatest(LocationTypes.GET_LOCATION, getLocation),
+    takeLatest(TransportTypes.GET_TRANSPORT, getTransport),
+  ]);
 }

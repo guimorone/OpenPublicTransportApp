@@ -93,17 +93,15 @@ class Maps extends Component {
     const { loading, data } = this.props.location;
 
     return (
-      <>
+      <StyledMap ref={this.mapRef} id="map" className="map">
         {!loading ? (
-          <StyledMap ref={this.mapRef} id="map" className="map">
-            <Button
-              onClick={() => (data?.data ? this.recenterMap() : null)}
-              className="m-3 w-25"
-              style={{ height: "4vh" }}
-            >
-              Recentralizar posição
-            </Button>
-          </StyledMap>
+          <Button
+            onClick={() => (data?.data ? this.recenterMap() : null)}
+            className="m-3 w-25"
+            style={{ height: "4vh" }}
+          >
+            Recentralizar posição
+          </Button>
         ) : (
           <ReactLoading
             type={"spin"}
@@ -117,7 +115,7 @@ class Maps extends Component {
             }}
           />
         )}
-      </>
+      </StyledMap>
     );
   }
 }

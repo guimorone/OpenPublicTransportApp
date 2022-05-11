@@ -3,7 +3,7 @@ import { Creators } from "../ducks/transport";
 import api from "../../services/api";
 import { toastr } from "react-redux-toastr";
 
-export default function* getTransport(id) {
+export default function* getTransport({ id }) {
   try {
     yield put(Creators.transportRequest());
     toastr.info("Pesquisando linha...");
@@ -11,7 +11,10 @@ export default function* getTransport(id) {
     const response = yield call(api.get, `/api/transport?id=${id}`);
 
     if (response.data) {
+      console.log(response.data);
       yield put(Creators.transportSuccess(response.data));
+      toastr.removeByType("info");
+      toastr.success("Informações encontradas com sucesso!");
     }
   } catch (err) {
     yield put(Creators.transportError({ err }));

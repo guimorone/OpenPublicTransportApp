@@ -11,10 +11,11 @@ export function getCurrentCoords(successFunction) {
     successFunction,
     (err) => {
       console.error(`ERROR(${err.code}): ${err.message}`);
-      toastr.warning(
-        "Por favor, ative sua permissão de localização",
-        "Sem ela, não poderemos fornecer os serviços necessários"
-      );
+      if (err.code === 1)
+        toastr.warning(
+          "Por favor, ative sua permissão de localização",
+          "Sem ela, não poderemos fornecer os serviços necessários"
+        );
     },
     options
   );
