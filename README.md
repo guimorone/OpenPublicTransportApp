@@ -2,13 +2,20 @@
 
 Criado com o intuito de melhorar o acesso a informação sobre os transportes públicos no país.
 
-# Local Development
+### Depedências:
 
-#### Instruções para Linux (outros sistemas operacionais podem ter pequenas mudanças).
+- Python v3.8.10
+- pip v20.0.2
+- React v18.1.0
+- npm v8.7.0
 
-## Backend
+## Local Development
 
-#### Vale ressaltar que será muito importante utilizar um ambiente virtual:
+Instruções para Linux (outros sistemas operacionais podem ter pequenas mudanças).
+
+### Backend
+
+Vale ressaltar que será muito importante utilizar um ambiente virtual:
 
 ```sh
   pip install virtualenv
@@ -23,7 +30,7 @@ Criado com o intuito de melhorar o acesso a informação sobre os transportes p�
 
 - Acesse `http://localhost:5500/`
 
-## Frontend
+### Frontend
 
 ```sh
   cd client
