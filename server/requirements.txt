@@ -8,6 +8,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 livereload==2.6.3
 MarkupSafe==2.1.1
+python-dotenv==0.20.0
 pytz==2022.1
 six==1.16.0
 tornado==6.1

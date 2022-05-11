@@ -3,12 +3,14 @@ import { BrowserRouter } from "react-router-dom";
 import RouteOptions from "../routes";
 import ReduxToastr from "react-redux-toastr";
 
+import { StyledApp } from "./styles";
+
 import "react-redux-toastr/lib/css/react-redux-toastr.min.css";
 
 class App extends Component {
   render() {
     return (
-      <>
+      <StyledApp>
         <BrowserRouter>
           <RouteOptions />
         </BrowserRouter>
@@ -23,7 +25,7 @@ class App extends Component {
           progressBar
           closeOnToastrClick
         />
-      </>
+      </StyledApp>
     );
   }
 }
