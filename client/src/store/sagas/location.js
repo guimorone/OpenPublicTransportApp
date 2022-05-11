@@ -13,7 +13,6 @@ export default function* getLocation({ coords }) {
 
     if (response.data) {
       yield put(Creators.locationSuccess(response.data));
-      toastr.success("Localização encontrada com sucesso!");
     }
   } catch (err) {
     yield put(Creators.locationError({ err }));

@@ -17,8 +17,8 @@ class Location(Resource):
                 'data': {
                     'city': data.get('city'),
                     'state': data.get('state'),
-                    'lat': lat,
-                    'lng': lng
+                    'lat': float(lat),
+                    'lng': float(lng)
                 }
             })
         except:

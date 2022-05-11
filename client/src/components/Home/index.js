@@ -1,8 +1,9 @@
 import React, { Component } from "react";
+import Maps from "../Maps";
 
 class Home extends Component {
   render() {
-    return <h1>Teste</h1>;
+    return <Maps />;
   }
 }
 
