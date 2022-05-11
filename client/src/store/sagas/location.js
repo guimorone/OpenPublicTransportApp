@@ -6,10 +6,14 @@ import { toastr } from "react-redux-toastr";
 export default function* getLocation({ coords }) {
   try {
     yield put(Creators.locationRequest());
-    const response = yield call(api.get, "/api/location", { coords });
+    const response = yield call(
+      api.get,
+      `/api/location?lat=${coords.lat}&lng=${coords.lng}`
+    );
 
     if (response.data) {
       yield put(Creators.locationSuccess(response.data));
+      toastr.success("Localização encontrada com sucesso!");
     }
   } catch (err) {
     yield put(Creators.locationError({ err }));
