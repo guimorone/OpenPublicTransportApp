@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 # Import Resources
 from resources.location import Location
+from resources.transport import TransportInfo
 
 app = Flask(__name__)
 
@@ -17,3 +18,4 @@ load_dotenv()
 api = Api(app, '/api')
 
 api.add_resource(Location, '/location', methods=['GET'])
+api.add_resource(TransportInfo, '/transport', methods=['GET'])
