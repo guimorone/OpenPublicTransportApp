@@ -23,4 +23,7 @@ export const NameLine = styled.h1`
 
 export const TableElement = styled.tr`
   color: #f2f2f2;
+  & * {
+    margin: 10%;
+  }
 `;

@@ -133,59 +133,60 @@ class Home extends Component {
                   filterWeekDay === "todos" ||
                   weekDay === filterWeekDay
                 ) {
-                  const arr = divideArray(element);
+                  const dividedArr = divideArray(element);
                   return (
-                    <Table
-                      hover
-                      className="mt-3"
-                      style={{
-                        textAlign: "center",
-                        borderCollapse: "unset",
-                        width: "64%",
-                      }}
-                      key={index}
-                    >
-                      <thead>
-                        <tr>
-                          <th>{weekDay}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {element.map((el, idx) => {
-                          return (
-                            <TableElement key={idx}>
-                              {el.observacao ? (
-                                <Popup
-                                  trigger={
-                                    <td>
-                                      <Button
-                                        variant="outline-warning"
-                                        style={{
-                                          border: "none",
-                                        }}
+                    <>
+                      <h3 className="p-2">{weekDay}</h3>
+                      <Table
+                        bordered
+                        hover
+                        className="mt-3"
+                        style={{
+                          textAlign: "center",
+                          borderCollapse: "unset",
+                          width: "64%",
+                        }}
+                        key={index}
+                      >
+                        <tbody>
+                          {dividedArr.map((e, i) => (
+                            <td>
+                              {e.map((el, idx) => {
+                                return (
+                                  <TableElement key={idx}>
+                                    {el.observacao ? (
+                                      <Popup
+                                        trigger={
+                                          <Button
+                                            variant="outline-warning"
+                                            style={{
+                                              border: "none",
+                                            }}
+                                          >
+                                            {el.horario_saida
+                                              ? el.horario_saida
+                                              : "Horário indisponível"}
+                                          </Button>
+                                        }
+                                        position="right center"
                                       >
+                                        <p>{el.observacao}</p>
+                                      </Popup>
+                                    ) : (
+                                      <p>
                                         {el.horario_saida
                                           ? el.horario_saida
                                           : "Horário indisponível"}
-                                      </Button>
-                                    </td>
-                                  }
-                                  position="right center"
-                                >
-                                  <p>{el.observacao}</p>
-                                </Popup>
-                              ) : (
-                                <td>
-                                  {el.horario_saida
-                                    ? el.horario_saida
-                                    : "Horário indisponível"}
-                                </td>
-                              )}
-                            </TableElement>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
+                                      </p>
+                                    )}
+                                  </TableElement>
+                                );
+                              })}
+                            </td>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </>
                   );
                 } else return null;
               })}
@@ -193,6 +194,9 @@ class Home extends Component {
           ) : (
             <ReactLoading type={"spin"} style={{ width: "10%" }} />
           )}
+          <Form.Label>
+            * Horários em amarelo contém observações. Clique para ver!
+          </Form.Label>
         </>
       );
     }

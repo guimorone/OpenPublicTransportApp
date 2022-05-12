@@ -45,7 +45,10 @@ export function createNewArrayFromArrayOfObject(list, key, value) {
   return newArray;
 }
 
-export const divideArray = (arr, elementsPerIndex = 6) =>
-  new Array(Math.ceil(arr.length / elementsPerIndex))
+export function divideArray(arr, elementsPerIndex = 6) {
+  const copy = [...arr]; // tem que fazer isso pq o splice altera o array
+
+  return new Array(Math.ceil(copy.length / elementsPerIndex))
     .fill()
-    .map(() => arr.splice(0, elementsPerIndex));
+    .map(() => copy.splice(0, elementsPerIndex));
+}
