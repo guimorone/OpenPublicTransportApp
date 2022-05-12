@@ -151,7 +151,7 @@ class Home extends Component {
                         >
                           <tbody className="p-3">
                             {dividedArr.map((e, i) => (
-                              <td>
+                              <td key={i}>
                                 {e.map((el, idx) => {
                                   return (
                                     <TableElement key={idx}>

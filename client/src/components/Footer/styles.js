@@ -4,7 +4,7 @@ export const FooterDivStyle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 3.5vh;
+  padding-bottom: 3.5vh !important;
 `;
 
 export const FooterLinkStyle = styled.a`
