@@ -25,6 +25,7 @@ import {
   formatMoney,
   noBreakLineSpace,
   createNewArrayFromArrayOfObject,
+  divideArray,
 } from "../../utils/misc";
 import { doGet } from "../../utils/httpFunctions";
 
@@ -131,7 +132,8 @@ class Home extends Component {
                   !filterWeekDay ||
                   filterWeekDay === "todos" ||
                   weekDay === filterWeekDay
-                )
+                ) {
+                  const arr = divideArray(element);
                   return (
                     <Table
                       hover
@@ -185,7 +187,7 @@ class Home extends Component {
                       </tbody>
                     </Table>
                   );
-                else return null;
+                } else return null;
               })}
             </>
           ) : (

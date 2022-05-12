@@ -27,17 +27,14 @@ export function getCurrentCoords(successFunction) {
   );
 }
 
-export function formatMoney(amount, format = "pt-BR", currency = "BRL") {
-  return new Intl.NumberFormat(format, {
+export const formatMoney = (amount, format = "pt-BR", currency = "BRL") =>
+  new Intl.NumberFormat(format, {
     style: "currency",
     currency: currency,
   }).format(amount);
-}
 
 // \u00A0 == &nbsp;
-export function noBreakLineSpace(str) {
-  return str.split(" ").join("\u00A0");
-}
+export const noBreakLineSpace = (str) => str.split(" ").join("\u00A0");
 
 export function createNewArrayFromArrayOfObject(list, key, value) {
   const newArray = [];
@@ -47,3 +44,8 @@ export function createNewArrayFromArrayOfObject(list, key, value) {
 
   return newArray;
 }
+
+export const divideArray = (arr, elementsPerIndex = 6) =>
+  new Array(Math.ceil(arr.length / elementsPerIndex))
+    .fill()
+    .map(() => arr.splice(0, elementsPerIndex));
