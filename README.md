@@ -30,6 +30,18 @@ Vale ressaltar que será muito importante utilizar um ambiente virtual:
   python3 run.py
 ```
 
+Para desativar:
+
+```sh
+  deactivate
+```
+
+#### Obs (para ativar no windows):
+
+```sh
+source venv/Scripts/activate
+```
+
 - Acesse `http://localhost:5500/`
 - Além disso, você deve criar um arquivo `.env` e colocar seu access token do LocationIQ lá no formato `LOCATION_IQ_ACCESS_TOKEN=<TOKEN>`
 
@@ -43,4 +55,4 @@ Vale ressaltar que será muito importante utilizar um ambiente virtual:
 
 - Acesse `http://localhost:3000/`
 
-#### Obs: Se der problema em algum pacote, pode adicionar a tag `--force` sem medo ao `npm i`
+#### Obs: Se der problema em algum pacote, pode adicionar a tag `--force` sem problemas ao `npm i`

@@ -13,7 +13,13 @@ export default function* getTransport({ id }) {
     if (response.data) {
       yield put(Creators.transportSuccess(response.data));
       toastr.removeByType("info");
-      toastr.success("Informações encontradas com sucesso!");
+      if (response.data.data.length)
+        toastr.success("Informações encontradas com sucesso!");
+      else
+        toastr.error(
+          "O código solicitado não é válido!",
+          "Por favor, tente novamente!"
+        );
     }
   } catch (err) {
     yield put(Creators.transportError({ err }));

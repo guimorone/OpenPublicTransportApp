@@ -9,13 +9,15 @@ import {
   StyledTitleTable,
   StyledNameAndValue,
   NameLine,
+  TableElement,
 } from "./styles";
 import { Form, Button, Table } from "react-bootstrap";
-
 import ReactLoading from "react-loading";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
-import { lineInfoRecife, tarifas } from "../../utils/constants";
-import { formatMoney, noBreakLineSpace } from "../../utils/misc";
+import { tarifas, grandeRecifeLinesUrl } from "../../utils/constants";
+import { formatMoney, noBreakLineSpace, getGovApiData } from "../../utils/misc";
 
 const weekDayOptions = ["Sábado", "Domingo", "Dias úteis"];
 
@@ -26,6 +28,7 @@ class Home extends Component {
       currentLineId: -1,
       filterWeekDay: "",
       showTable: false,
+      lineInfoRecife: [],
     };
   }
 
@@ -42,13 +45,17 @@ class Home extends Component {
         document.getElementById("searchLineBtn").click();
       }
     });
+
+    getGovApiData(grandeRecifeLinesUrl)
+      .then((data) => this.setState({ lineInfoRecife: data }))
+      .catch((err) => console.error(err));
   }
 
   renderLineInformation() {
     const { loading, data } = this.props.transport;
-    const { filterWeekDay, currentLineId } = this.state;
+    const { filterWeekDay, currentLineId, lineInfoRecife } = this.state;
 
-    if (data?.data) {
+    if (data?.data && lineInfoRecife) {
       const local = lineInfoRecife.find(
         (e) => e.codigo_linha === currentLineId.toString()
       );
@@ -62,7 +69,6 @@ class Home extends Component {
         valor = "Preço indisponível";
       }
 
-      // \u00A0 == &nbsp;
       return (
         <>
           {!loading ? (
@@ -96,16 +102,17 @@ class Home extends Component {
                 </Form.Select>
               </StyledTitleTable>
               <Table
-                striped
-                bordered
                 hover
-                className="mt-3 w-75"
-                style={{ textAlign: "center" }}
+                className="mt-3"
+                style={{
+                  textAlign: "center",
+                  borderCollapse: "unset",
+                  width: "64%",
+                }}
               >
                 <thead>
                   <tr>
                     <th>Horário de saída</th>
-                    <th>Observação</th>
                     <th>Dia da semana</th>
                   </tr>
                 </thead>
@@ -129,15 +136,24 @@ class Home extends Component {
                       weekDay === filterWeekDay
                     )
                       return (
-                        <tr key={index}>
+                        <TableElement key={index}>
                           <td>
                             {element.horario_saida
                               ? element.horario_saida
                               : "Horário indisponível"}
                           </td>
-                          <td>{element.observacao}</td>
                           <td>{weekDay}</td>
-                        </tr>
+                          {element.observacao ? (
+                            <Popup
+                              trigger={
+                                <Button variant="warning">Observação</Button>
+                              }
+                              position="right center"
+                            >
+                              <p>{element.observacao}</p>
+                            </Popup>
+                          ) : null}
+                        </TableElement>
                       );
                     else return null;
                   })}

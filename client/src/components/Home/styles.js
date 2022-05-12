@@ -20,3 +20,7 @@ export const StyledNameAndValue = styled.div`
 export const NameLine = styled.h1`
   font-size: 2.15rem;
 `;
+
+export const TableElement = styled.tr`
+  color: #f2f2f2;
+`;
