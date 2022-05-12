@@ -40,11 +40,6 @@ class Home extends Component {
     };
   }
 
-  handleSearchClick = () => {
-    this.props.getTransport(this.state.currentLineId);
-    this.setState({ showTable: true });
-  };
-
   componentDidMount() {
     const input = document.getElementById("inputLineId");
     input.addEventListener("keypress", (event) => {
@@ -58,6 +53,19 @@ class Home extends Component {
       .then((data) => this.setState({ lineInfoRecife: data }))
       .catch((err) => console.error(err));
   }
+
+  resetState = (element) => {
+    this.setState({
+      currentLineId: element.target.value.split(" - ")[0],
+      showTable: false,
+      filterWeekDay: "",
+    });
+  };
+
+  handleSearchClick = () => {
+    this.props.getTransport(this.state.currentLineId);
+    this.setState({ showTable: true });
+  };
 
   renderLineInformation() {
     const { loading, data } = this.props.transport;
@@ -223,12 +231,7 @@ class Home extends Component {
             <Form.Control
               type="search"
               placeholder="Linha do transporte"
-              onChange={(element) =>
-                this.setState({
-                  currentLineId: element.target.value.split(" - ")[0],
-                  showTable: false,
-                })
-              }
+              onChange={this.resetState}
               style={{ height: 50 }}
               id="inputLineId"
               name="selectLine"

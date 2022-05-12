@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import Immutable from "seamless-immutable";
 
@@ -7,14 +7,12 @@ import rootSaga from "./sagas";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const configureStore = (initialState) =>
-  createStore(
-    rootReducer,
-    Immutable(initialState),
-    applyMiddleware(sagaMiddleware)
-  );
-
-const store = configureStore({});
+const store = configureStore({
+  reducer: rootReducer,
+  preloadedState: Immutable({}),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
+});
 
 sagaMiddleware.run(rootSaga);
 
