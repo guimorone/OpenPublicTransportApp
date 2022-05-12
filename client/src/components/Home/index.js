@@ -149,7 +149,7 @@ class Home extends Component {
                           }}
                           key={index}
                         >
-                          <tbody>
+                          <tbody className="p-3">
                             {dividedArr.map((e, i) => (
                               <td>
                                 {e.map((el, idx) => {
