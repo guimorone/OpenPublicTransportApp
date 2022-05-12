@@ -27,11 +27,12 @@ Vale ressaltar que será muito importante utilizar um ambiente virtual:
   cd server
   virtualenv -p python3 venv && source venv/bin/activate
   pip install -r requirements.txt
-  python3 run.py
+  python run.py
 ```
 
 - Acesse `http://localhost:5500/`
 - Além disso, você deve criar um arquivo `.env` e colocar seu access token do LocationIQ lá no formato `LOCATION_IQ_ACCESS_TOKEN=<TOKEN>`
+- Se `python run.py` não funcionar, tente `python3 run.py`
 
 Para desativar:
 

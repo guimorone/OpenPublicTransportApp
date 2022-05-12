@@ -17,7 +17,11 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 import { tarifas, grandeRecifeLinesUrl } from "../../utils/constants";
-import { formatMoney, noBreakLineSpace } from "../../utils/misc";
+import {
+  formatMoney,
+  noBreakLineSpace,
+  createNewArrayFromArrayOfObject,
+} from "../../utils/misc";
 import { doGet } from "../../utils/httpFunctions";
 
 const weekDayOptions = ["Sábado", "Domingo", "Dias úteis"];
@@ -63,6 +67,12 @@ class Home extends Component {
 
       if (!local) return <h1>Código incorreto, tente novamente!</h1>;
 
+      const arrayByTypeOfDay = [
+        createNewArrayFromArrayOfObject(data.data, "tipo_dia", "DOM"),
+        createNewArrayFromArrayOfObject(data.data, "tipo_dia", "DUT"),
+        createNewArrayFromArrayOfObject(data.data, "tipo_dia", "SAB"),
+      ];
+
       let valor;
       try {
         valor = tarifas[local.tarifa_linha];
@@ -102,64 +112,65 @@ class Home extends Component {
                   ))}
                 </Form.Select>
               </StyledTitleTable>
-              <Table
-                hover
-                className="mt-3"
-                style={{
-                  textAlign: "center",
-                  borderCollapse: "unset",
-                  width: "64%",
-                }}
-              >
-                <thead>
-                  <tr>
-                    <th>Horário de saída</th>
-                    <th>Dia da semana</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {data?.data?.map((element, index) => {
-                    let weekDay;
-                    switch (element.tipo_dia) {
-                      case "SAB":
-                        weekDay = "Sábado";
-                        break;
-                      case "DOM":
-                        weekDay = "Domingo";
-                        break;
-                      default:
-                        weekDay = "Dias úteis";
-                        break;
-                    }
-                    if (
-                      !filterWeekDay ||
-                      filterWeekDay === "todos" ||
-                      weekDay === filterWeekDay
-                    )
-                      return (
-                        <TableElement key={index}>
-                          <td>
-                            {element.horario_saida
-                              ? element.horario_saida
-                              : "Horário indisponível"}
-                          </td>
-                          <td>{weekDay}</td>
-                          {element.observacao ? (
-                            <Popup
-                              trigger={
-                                <Button variant="warning">Observação</Button>
-                              }
-                              position="right center"
-                            >
-                              <p>{element.observacao}</p>
-                            </Popup>
-                          ) : null}
-                        </TableElement>
-                      );
-                    else return null;
-                  })}
-                </tbody>
-              </Table>
+              {arrayByTypeOfDay.map((element, index) => {
+                let weekDay;
+                switch (index) {
+                  case 0:
+                    weekDay = "Domingo";
+                    break;
+                  case 1:
+                    weekDay = "Dias úteis";
+                    break;
+                  default:
+                    weekDay = "Sábado";
+                    break;
+                }
+                if (
+                  !filterWeekDay ||
+                  filterWeekDay === "todos" ||
+                  weekDay === filterWeekDay
+                )
+                  return (
+                    <Table
+                      hover
+                      className="mt-3"
+                      style={{
+                        textAlign: "center",
+                        borderCollapse: "unset",
+                        width: "64%",
+                      }}
+                      key={index}
+                    >
+                      <thead>{weekDay}</thead>
+                      <tbody>
+                        {element.map((el, idx) => {
+                          return (
+                            <TableElement key={idx}>
+                              <td>
+                                {el.horario_saida
+                                  ? el.horario_saida
+                                  : "Horário indisponível"}
+                              </td>
+                              {el.observacao ? (
+                                <Popup
+                                  trigger={
+                                    <Button variant="warning">
+                                      Observação
+                                    </Button>
+                                  }
+                                  position="right center"
+                                >
+                                  <p>{el.observacao}</p>
+                                </Popup>
+                              ) : null}
+                            </TableElement>
+                          );
+                        })}
+                      </tbody>
+                    </Table>
+                  );
+                else return null;
+              })}
             </>
           ) : (
             <ReactLoading type={"spin"} style={{ width: "10%" }} />

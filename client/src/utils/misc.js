@@ -38,3 +38,12 @@ export function formatMoney(amount, format = "pt-BR", currency = "BRL") {
 export function noBreakLineSpace(str) {
   return str.split(" ").join("\u00A0");
 }
+
+export function createNewArrayFromArrayOfObject(list, key, value) {
+  const newArray = [];
+  list.forEach((element) => {
+    if (element[key] === value) newArray.push(element);
+  });
+
+  return newArray;
+}
