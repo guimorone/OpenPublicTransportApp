@@ -210,7 +210,7 @@ class Home extends Component {
   }
 
   render() {
-    const { showTable, lineInfoRecife, currentLineId } = this.state;
+    const { showTable, lineInfoRecife } = this.state;
 
     return (
       <StyledHome className="mb-5">
