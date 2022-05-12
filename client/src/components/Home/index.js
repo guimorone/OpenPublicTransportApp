@@ -210,7 +210,7 @@ class Home extends Component {
   }
 
   render() {
-    const { showTable } = this.state;
+    const { showTable, lineInfoRecife, currentLineId } = this.state;
 
     return (
       <StyledHome className="mb-5">
@@ -221,17 +221,27 @@ class Home extends Component {
               Buscar por linha
             </Form.Label>
             <Form.Control
-              type="number"
+              type="search"
               placeholder="Linha do transporte"
               onChange={(element) =>
                 this.setState({
-                  currentLineId: element.target.value,
+                  currentLineId: element.target.value.split(" - ")[0],
                   showTable: false,
                 })
               }
               style={{ height: 50 }}
               id="inputLineId"
+              name="selectLine"
+              list="lineOptions"
             />
+            <datalist id="lineOptions">
+              {lineInfoRecife?.map((element, index) => (
+                <option
+                  value={element.codigo_linha + " - " + element.descricao_linha}
+                  key={index}
+                />
+              ))}
+            </datalist>
             <Form.Text style={{ color: "#faedc6" }}>Apenas números</Form.Text>
           </Form.Group>
         </Form>
