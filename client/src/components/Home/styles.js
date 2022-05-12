@@ -15,10 +15,12 @@ export const StyledNameAndValue = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 2.2% !important;
+  gap: 10%;
 `;
 
 export const NameLine = styled.h1`
-  font-size: 2.15rem;
+  font-size: 2rem;
+  width: 40vw;
 `;
 
 export const TableElement = styled.tr`

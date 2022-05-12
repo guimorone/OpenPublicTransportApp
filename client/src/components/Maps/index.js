@@ -50,6 +50,7 @@ class Maps extends Component {
 
     this.mapElement.getView().animate({
       center: fromLonLat([data.data.lng, data.data.lat]),
+      zoom: DEFAULT_ZOOM,
       duration: RECENTER_DURATION,
     });
   }
