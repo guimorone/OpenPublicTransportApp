@@ -134,60 +134,67 @@ class Home extends Component {
                   weekDay === filterWeekDay
                 ) {
                   const dividedArr = divideArray(element);
-                  return (
-                    <>
-                      <h3 className="p-2">{weekDay}</h3>
-                      <Table
-                        bordered
-                        hover
-                        className="mt-3"
-                        style={{
-                          textAlign: "center",
-                          borderCollapse: "unset",
-                          width: "64%",
-                        }}
-                        key={index}
-                      >
-                        <tbody>
-                          {dividedArr.map((e, i) => (
-                            <td>
-                              {e.map((el, idx) => {
-                                return (
-                                  <TableElement key={idx}>
-                                    {el.observacao ? (
-                                      <Popup
-                                        trigger={
-                                          <Button
-                                            variant="outline-warning"
-                                            style={{
-                                              border: "none",
-                                            }}
-                                          >
-                                            {el.horario_saida
-                                              ? el.horario_saida
-                                              : "Horário indisponível"}
-                                          </Button>
-                                        }
-                                        position="right center"
-                                      >
-                                        <p>{el.observacao}</p>
-                                      </Popup>
-                                    ) : (
-                                      <p>
-                                        {el.horario_saida
-                                          ? el.horario_saida
-                                          : "Horário indisponível"}
-                                      </p>
-                                    )}
-                                  </TableElement>
-                                );
-                              })}
-                            </td>
-                          ))}
-                        </tbody>
-                      </Table>
-                    </>
-                  );
+                  if (element.length)
+                    return (
+                      <>
+                        <h3 className="p-2">{weekDay}</h3>
+                        <Table
+                          bordered
+                          hover
+                          className="mt-3"
+                          style={{
+                            textAlign: "center",
+                            borderCollapse: "unset",
+                            width: "64%",
+                          }}
+                          key={index}
+                        >
+                          <tbody>
+                            {dividedArr.map((e, i) => (
+                              <td>
+                                {e.map((el, idx) => {
+                                  return (
+                                    <TableElement key={idx}>
+                                      {el.observacao ? (
+                                        <Popup
+                                          trigger={
+                                            <Button
+                                              variant="outline-warning"
+                                              style={{
+                                                border: "none",
+                                              }}
+                                            >
+                                              {el.horario_saida
+                                                ? el.horario_saida
+                                                : "Horário indisponível"}
+                                            </Button>
+                                          }
+                                          position="right center"
+                                        >
+                                          <p>{el.observacao}</p>
+                                        </Popup>
+                                      ) : (
+                                        <p>
+                                          {el.horario_saida
+                                            ? el.horario_saida
+                                            : "Horário indisponível"}
+                                        </p>
+                                      )}
+                                    </TableElement>
+                                  );
+                                })}
+                              </td>
+                            ))}
+                          </tbody>
+                        </Table>
+                      </>
+                    );
+                  else
+                    return (
+                      <h3 className="p-4" style={{ color: "#630606" }}>
+                        Essa linha não funciona aos {weekDay + "s"}
+                      </h3>
+                    );
                 } else return null;
               })}
             </>
