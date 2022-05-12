@@ -16,15 +16,17 @@ import ReactLoading from "react-loading";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-import { tarifas, grandeRecifeLinesUrl } from "../../utils/constants";
+import {
+  tarifas,
+  grandeRecifeLinesUrl,
+  weekDayOptions,
+} from "../../utils/constants";
 import {
   formatMoney,
   noBreakLineSpace,
   createNewArrayFromArrayOfObject,
 } from "../../utils/misc";
 import { doGet } from "../../utils/httpFunctions";
-
-const weekDayOptions = ["Sábado", "Domingo", "Dias úteis"];
 
 class Home extends Component {
   constructor(props) {

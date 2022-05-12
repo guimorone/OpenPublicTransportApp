@@ -11,3 +11,5 @@ export const tarifas = {
   E4: 13.7,
   E5: 7.7,
 };
+
+export const weekDayOptions = ["Sábado", "Domingo", "Dias úteis"];
