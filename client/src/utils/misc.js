@@ -16,6 +16,12 @@ export function getCurrentCoords(successFunction) {
           "Por favor, ative sua permissão de localização",
           "Sem ela, não poderemos fornecer os serviços necessários"
         );
+      else {
+        toastr.warning(
+          "Parece que houve algum problema",
+          "Tente novamente mais tarde!"
+        );
+      }
     },
     options
   );

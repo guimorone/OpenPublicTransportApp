@@ -11,7 +11,6 @@ export default function* getTransport({ id }) {
     const response = yield call(api.get, `/api/transport?id=${id}`);
 
     if (response.data) {
-      console.log(response.data);
       yield put(Creators.transportSuccess(response.data));
       toastr.removeByType("info");
       toastr.success("Informações encontradas com sucesso!");
