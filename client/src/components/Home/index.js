@@ -139,6 +139,7 @@ class Home extends Component {
                           <td>{weekDay}</td>
                         </tr>
                       );
+                    else return null;
                   })}
                 </tbody>
               </Table>
