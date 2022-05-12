@@ -17,7 +17,8 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
 import { tarifas, grandeRecifeLinesUrl } from "../../utils/constants";
-import { formatMoney, noBreakLineSpace, getGovApiData } from "../../utils/misc";
+import { formatMoney, noBreakLineSpace } from "../../utils/misc";
+import { doGet } from "../../utils/httpFunctions";
 
 const weekDayOptions = ["Sábado", "Domingo", "Dias úteis"];
 
@@ -46,7 +47,7 @@ class Home extends Component {
       }
     });
 
-    getGovApiData(grandeRecifeLinesUrl)
+    doGet(grandeRecifeLinesUrl)
       .then((data) => this.setState({ lineInfoRecife: data }))
       .catch((err) => console.error(err));
   }

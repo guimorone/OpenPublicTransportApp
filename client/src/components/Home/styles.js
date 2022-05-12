@@ -14,7 +14,7 @@ export const StyledNameAndValue = styled.div`
   color: #fabb51;
   display: flex;
   justify-content: center;
-  padding-bottom: 2.2%;
+  padding-bottom: 2.2% !important;
 `;
 
 export const NameLine = styled.h1`

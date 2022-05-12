@@ -30,6 +30,9 @@ Vale ressaltar que será muito importante utilizar um ambiente virtual:
   python3 run.py
 ```
 
+- Acesse `http://localhost:5500/`
+- Além disso, você deve criar um arquivo `.env` e colocar seu access token do LocationIQ lá no formato `LOCATION_IQ_ACCESS_TOKEN=<TOKEN>`
+
 Para desativar:
 
 ```sh
@@ -41,9 +44,6 @@ Para desativar:
 ```sh
 source venv/Scripts/activate
 ```
-
-- Acesse `http://localhost:5500/`
-- Além disso, você deve criar um arquivo `.env` e colocar seu access token do LocationIQ lá no formato `LOCATION_IQ_ACCESS_TOKEN=<TOKEN>`
 
 ### Frontend
 

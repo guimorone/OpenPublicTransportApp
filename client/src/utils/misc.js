@@ -1,5 +1,4 @@
 import { toastr } from "react-redux-toastr";
-import axios from "axios";
 
 export function getCurrentCoords(successFunction) {
   const options = {
@@ -38,14 +37,4 @@ export function formatMoney(amount, format = "pt-BR", currency = "BRL") {
 // \u00A0 == &nbsp;
 export function noBreakLineSpace(str) {
   return str.split(" ").join("\u00A0");
-}
-
-export async function getGovApiData(url) {
-  try {
-    const response = await axios.get(url);
-
-    return response.data;
-  } catch {
-    return null;
-  }
 }
