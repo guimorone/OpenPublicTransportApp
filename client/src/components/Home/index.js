@@ -141,28 +141,42 @@ class Home extends Component {
                       }}
                       key={index}
                     >
-                      <thead>{weekDay}</thead>
+                      <thead>
+                        <tr>
+                          <th>{weekDay}</th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {element.map((el, idx) => {
                           return (
                             <TableElement key={idx}>
-                              <td>
-                                {el.horario_saida
-                                  ? el.horario_saida
-                                  : "Horário indisponível"}
-                              </td>
                               {el.observacao ? (
                                 <Popup
                                   trigger={
-                                    <Button variant="warning">
-                                      Observação
-                                    </Button>
+                                    <td>
+                                      <Button
+                                        variant="outline-warning"
+                                        style={{
+                                          border: "none",
+                                        }}
+                                      >
+                                        {el.horario_saida
+                                          ? el.horario_saida
+                                          : "Horário indisponível"}
+                                      </Button>
+                                    </td>
                                   }
                                   position="right center"
                                 >
                                   <p>{el.observacao}</p>
                                 </Popup>
-                              ) : null}
+                              ) : (
+                                <td>
+                                  {el.horario_saida
+                                    ? el.horario_saida
+                                    : "Horário indisponível"}
+                                </td>
+                              )}
                             </TableElement>
                           );
                         })}
