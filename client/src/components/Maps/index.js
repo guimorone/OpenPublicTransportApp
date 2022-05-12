@@ -5,12 +5,8 @@ import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
-import VectorSource from "ol/source/Vector";
 import OSM from "ol/source/OSM";
 import { fromLonLat } from "ol/proj";
-import Feature from "ol/Feature";
-import { Icon, Style } from "ol/style";
-import Point from "ol/geom/Point";
 
 import { connect } from "react-redux";
 import { Creators as LocationCreators } from "../../store/ducks/location";
@@ -46,38 +42,7 @@ class Maps extends Component {
       };
 
       this.mapElement = new Map(options);
-      this.createCurrentLocationIcon();
     }
-  }
-
-  createCurrentLocationIcon() {
-    const { data } = this.props.location;
-
-    const iconFeature = new Feature({
-      geometry: new Point(fromLonLat([data.data.lng, data.data.lat])),
-      name: "Posição atual",
-    });
-
-    const iconStyle = new Style({
-      image: new Icon({
-        anchor: [0.5, 46],
-        anchorXUnits: "fraction",
-        anchorYUnits: "pixels",
-        src: "../../assets/marker.png",
-      }),
-    });
-
-    iconFeature.setStyle(iconStyle);
-
-    const vectorSource = new VectorSource({
-      features: [iconFeature],
-    });
-
-    const vectorLayer = new VectorLayer({
-      source: vectorSource,
-    });
-
-    this.mapElement.addLayer(vectorLayer);
   }
 
   recenterMap() {

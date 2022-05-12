@@ -26,3 +26,14 @@ export function getCurrentCoords(successFunction) {
     options
   );
 }
+
+export function formatMoney(amount, format = "pt-BR", currency = "BRL") {
+  return new Intl.NumberFormat(format, {
+    style: "currency",
+    currency: currency,
+  }).format(amount);
+}
+
+export function noBreakLineSpace(str) {
+  return str.split(" ").join("\u00A0");
+}
