@@ -4,9 +4,12 @@ import React, { Component } from "react";
 import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
-import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
-import { fromLonLat } from "ol/proj";
+import { Circle as CircleStyle, Style, Fill, Stroke } from "ol/style";
+import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
+import { OSM, Vector as VectorSource } from "ol/source";
+import { fromLonLat, transform } from "ol/proj";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
 
 import { connect } from "react-redux";
 import { Creators as LocationCreators } from "../../store/ducks/location";
@@ -17,6 +20,7 @@ import Button from "react-bootstrap/Button";
 
 const RECENTER_DURATION = 1500;
 const DEFAULT_ZOOM = 17;
+const CIRCLE_RADIUS = 10;
 
 class Maps extends Component {
   constructor(props) {
@@ -24,10 +28,28 @@ class Maps extends Component {
     this.mapRef = React.createRef();
   }
 
+  generateIsHerePoint(coords) {
+    const feat = new Feature({
+      geometry: new Point(fromLonLat(coords)),
+    });
+
+    const styledPoint = new Style({
+      image: new CircleStyle({
+        radius: CIRCLE_RADIUS,
+        fill: new Fill({ color: "#FF5F00" }),
+        stroke: new Stroke({ color: "#B20600", width: CIRCLE_RADIUS / 1.5 }),
+      }),
+    });
+
+    feat.setStyle(styledPoint);
+    return feat;
+  }
+
   componentDidUpdate() {
     const { data } = this.props.location;
 
     if (data?.data) {
+      const feat = this.generateIsHerePoint([data.data.lng, data.data.lat]);
       const options = {
         view: new View({
           center: fromLonLat([data.data.lng, data.data.lat]),
@@ -37,11 +59,23 @@ class Maps extends Component {
           new TileLayer({
             source: new OSM(),
           }),
+          new VectorLayer({
+            source: new VectorSource({
+              features: [feat],
+            }),
+          }),
         ],
         target: this.mapRef.current,
       };
 
       this.mapElement = new Map(options);
+      this.mapElement.on("click", (event) => {
+        const [lng, lat] = transform(
+          event.coordinate,
+          "EPSG:3857",
+          "EPSG:4326"
+        );
+      });
     }
   }
 

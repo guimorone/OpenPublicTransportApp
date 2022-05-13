@@ -79,9 +79,9 @@ class Home extends Component {
       if (!local) return <h1>Código incorreto, tente novamente!</h1>;
 
       const arrayByTypeOfDay = [
-        createNewArrayFromArrayOfObject(data.data, "tipo_dia", "DOM"),
         createNewArrayFromArrayOfObject(data.data, "tipo_dia", "DUT"),
         createNewArrayFromArrayOfObject(data.data, "tipo_dia", "SAB"),
+        createNewArrayFromArrayOfObject(data.data, "tipo_dia", "DOM"),
       ];
 
       let valor;
@@ -126,10 +126,10 @@ class Home extends Component {
               {arrayByTypeOfDay.map((element, index) => {
                 let weekDay;
                 switch (index) {
-                  case 0:
+                  case 2:
                     weekDay = "Domingo";
                     break;
-                  case 1:
+                  case 0:
                     weekDay = "Dias úteis";
                     break;
                   default:
@@ -145,7 +145,7 @@ class Home extends Component {
                   if (element.length)
                     return (
                       <>
-                        <h3 className="p-2">{weekDay}</h3>
+                        <h3 className="p-3">{weekDay}</h3>
                         <Table
                           bordered
                           hover
@@ -209,9 +209,11 @@ class Home extends Component {
           ) : (
             <ReactLoading type={"spin"} style={{ width: "10%" }} />
           )}
-          <Form.Label>
-            * Horários em amarelo contém observações. Clique para ver!
-          </Form.Label>
+          <p>
+            * Os horários em feriados geralmente seguem o mesmo padrão dos
+            Domingos.
+          </p>
+          <p>* Horários em amarelo contém observações. Clique para ver!</p>
         </>
       );
     }
