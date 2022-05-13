@@ -10,6 +10,7 @@ import {
   StyledNameAndValue,
   NameLine,
   TableElement,
+  ObsTable,
 } from "./styles";
 import { Form, Button, Table } from "react-bootstrap";
 import ReactLoading from "react-loading";
@@ -209,11 +210,13 @@ class Home extends Component {
           ) : (
             <ReactLoading type={"spin"} style={{ width: "10%" }} />
           )}
-          <p>
-            * Os horários em feriados geralmente seguem o mesmo padrão dos
-            Domingos.
-          </p>
-          <p>* Horários em amarelo contém observações. Clique para ver!</p>
+          <ObsTable>
+            <li>
+              Os horários em feriados geralmente seguem o mesmo padrão dos
+              Domingos.
+            </li>
+            <li>Horários em amarelo contém observações. Clique para ver!</li>
+          </ObsTable>
         </>
       );
     }

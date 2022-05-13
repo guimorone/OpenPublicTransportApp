@@ -29,3 +29,7 @@ export const TableElement = styled.tr`
     margin: 10%;
   }
 `;
+
+export const ObsTable = styled.ul`
+  width: 610px;
+`;
