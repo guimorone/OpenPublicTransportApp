@@ -9,18 +9,19 @@ import json
 class Location(Resource):
     def get(self):
         try:
-            lat, lng = request.args.get('lat'), request.args.get('lng')
+            lat, lng = request.args.get("lat"), request.args.get("lng")
             response = requests.get(
-                f"https://us1.locationiq.com/v1/reverse.php?key={os.getenv('LOCATION_IQ_ACCESS_TOKEN')}&lat={lat}&lon={lng}&format=json")
-            data = json.loads(response.text).get('address')
-            return({
-                'data': {
-                    'city': data.get('city'),
-                    'state': data.get('state'),
-                    'lat': float(lat),
-                    'lng': float(lng)
+                f"https://us1.locationiq.com/v1/reverse.php?key={os.getenv('LOCATION_IQ_ACCESS_TOKEN')}&lat={lat}&lon={lng}&format=json"
+            )
+            data = json.loads(response.text).get("address")
+            return {
+                "data": {
+                    "city": data.get("city"),
+                    "state": data.get("state"),
+                    "lat": float(lat),
+                    "lng": float(lng),
                 }
-            })
+            }
         except:
             traceback.print_exc()
-            return ({'data': None})
+            return {"data": None}
